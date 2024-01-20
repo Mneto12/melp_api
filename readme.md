@@ -1,6 +1,6 @@
 ## Docs
 
-1) Descargar collection
+1) Descargar collection -> https://drive.google.com/file/d/1RunsX3gUhCVFkI_28sy1OqvyTtJhzU0-/view?usp=sharing
 2) Importar Collection de postman y usar los endpoints
 3) link: https://mel-api-prod.onrender.com/api/v1/endpoints
 

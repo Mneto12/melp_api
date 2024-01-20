@@ -13,6 +13,6 @@ app.use(morgan('tiny'));
 
 // Importamos el router dinamico
 app.use(router);
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server is Running on Port:${port}`);
 });

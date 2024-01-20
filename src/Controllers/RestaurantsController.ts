@@ -2,7 +2,7 @@
  * @author Miguel Coronel
  * @date 01-19-2024
  */
-import { Request, Response } from "express";
+import { Request, Response, query } from "express";
 import service from "../Services/RestarurantsService";
 /**
    * Método para obtener todos los restaurantes
@@ -51,9 +51,11 @@ const create = async ({ body }: Request, res: Response) => {
     }
 }
 
-const update = async ({ body }: Request, res: Response) => {
+const update = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const { body } = req;
     try {
-        const result = await service.create(body);
+        const result = await service.update(body, id);
         return res.status(200).json({
             restaurant: result,
             message: "Restaurant updated successfully"
@@ -69,10 +71,25 @@ const deleteRest = async ({ params }: Request, res: Response) => {
     const { id } = params
     try {
         await service.deleteRest(id);
-        return res.status(204).json({
+        return res.status(200).json({
             restaurantDeleted: true,
             message: "Restaurant delete successfully"
         });
+    } catch (e) {
+        if (e instanceof Error) {
+            return res.status(500).json({message: e.message})
+        }
+    }
+}
+
+const stadistics = async ({ query }: Request, res: Response) => {
+    const { lat, lng, radius } = query
+    try {
+        // @ts-ignore
+        const result = await service.searchByGeographic(lat, lng, radius)
+        return res.status(200).json({
+            restaurants: result,
+        })
     } catch (e) {
         if (e instanceof Error) {
             return res.status(500).json({message: e.message})
@@ -87,5 +104,6 @@ export default module.exports = {
     getById,
     create,
     update,
-    deleteRest
+    deleteRest,
+    stadistics
 }

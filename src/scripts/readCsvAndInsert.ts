@@ -20,7 +20,6 @@ type Restaurants = {
 
 const readCsvFileAndInsertData = () => {
     const csvFilePath = path.resolve(__dirname, '../../src/file/restaurantes.csv');
-    let data: Restaurants[] = [];
     const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
 
     parse(fileContent, {
@@ -46,6 +45,8 @@ const readCsvFileAndInsertData = () => {
       let formatResult = result.map(restaurant => {
         return [restaurant.id, restaurant.rating, restaurant.name, restaurant.site, restaurant.email, restaurant.phone, restaurant.street, restaurant.city, restaurant.state, restaurant.lat, restaurant.lng]
       })
+
+      // TODO: Refactor
       await pool.query(`
       CREATE TABLE IF NOT EXISTS restaurants (
         id TEXT PRIMARY KEY,
@@ -66,13 +67,6 @@ const readCsvFileAndInsertData = () => {
           console.log(err);
           console.log(result);
       })
-
-      // client.query(format('INSERT INTO users (id, name, email, phone) VALUES %L', values),[], (err, result)=>{
-      //   console.log(err);
-      //   console.log(result);
-      // });
-      
-
       console.log(queryInsert)
     });
 }

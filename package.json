@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "file": "ts-node-dev src/scripts/readCsvAndInsert.ts"
+    "file": "ts-node-dev src/scripts/readCsvAndInsert.ts",
+    "build": "npx tsc",
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",

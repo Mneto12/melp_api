@@ -19,9 +19,12 @@ type Restaurants = {
 };
 
 const readCsvFileAndInsertData = () => {
+
+    // ruta del archivo csv que se va a leer y insertar en la base de datos
     const csvFilePath = path.resolve(__dirname, '../../src/file/restaurantes.csv');
     const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
 
+    // parsear el archivo csv y insertar los datos en la base de datos
     parse(fileContent, {
       delimiter: ',',
       columns: true,
@@ -42,11 +45,12 @@ const readCsvFileAndInsertData = () => {
         console.error(error);
       }
 
+      // formato de los datos a uno valido
       let formatResult = result.map(restaurant => {
         return [restaurant.id, restaurant.rating, restaurant.name, restaurant.site, restaurant.email, restaurant.phone, restaurant.street, restaurant.city, restaurant.state, restaurant.lat, restaurant.lng]
       })
 
-      // TODO: Refactor
+      // TODO: Refactor table and add more rules
       await pool.query(`
       CREATE TABLE IF NOT EXISTS restaurants (
         id TEXT PRIMARY KEY,
@@ -62,12 +66,11 @@ const readCsvFileAndInsertData = () => {
         lng FLOAT)
       `)
 
-      
-      const queryInsert = await pool.query(format('INSERT INTO restaurants (id, rating, name, site, email, phone, street, city, state, lat, lng) VALUES %L', formatResult),[], (err, result)=>{
+      // Insercion masiva de datos
+      await pool.query(format('INSERT INTO restaurants (id, rating, name, site, email, phone, street, city, state, lat, lng) VALUES %L', formatResult),[], (err, result)=>{
           console.log(err);
           console.log(result);
       })
-      console.log(queryInsert)
     });
 }
 

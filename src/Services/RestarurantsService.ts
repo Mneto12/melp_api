@@ -32,25 +32,45 @@ const getAll = async (page: string | undefined): Promise<any> => {
     }
 }
 
+/**
+   * Método para obtener un restaurante por su id
+   * @returns {Promise<any>}
+*/
 const getById = async (id: string): Promise<any> => {
     const restaurant = await repository.getById(id)
     return restaurant.rows[0]
 }
 
+/**
+   * Método para crear un restaurante
+   * @returns {Promise<any>}
+*/
 const create = async (restaurant: any): Promise<any> => {
     const restaurantCreated = await repository.create(restaurant)
     return restaurantCreated.rows[0]
 }
 
+/**
+   * Método para actualizar un restaurante por su id
+   * @returns {Promise<any>}
+*/
 const update = async (restaurant: any, id: string): Promise<any> => {
     const restaurantUpdated = await repository.update(restaurant, id)
     return restaurantUpdated.rows[0]
 }
 
+/**
+   * Método para eliminar un restaurante por su id
+   * @returns {Promise<any>}
+*/
 const deleteRest = async (id: string): Promise<void> => {
     await repository.deleteRest(id)
 }
 
+/**
+   * Método para buscar los restaurantes dentro de un radio
+   * @returns {Promise<any>}
+*/
 const searchByGeographic = async (lat: string, lng: string, radius: string): Promise<any> => {
     let latFormated = parseFloat(lat)
     let lngFormated = parseFloat(lng)
@@ -60,6 +80,7 @@ const searchByGeographic = async (lat: string, lng: string, radius: string): Pro
 
     if (!restaurants) return []
 
+    // Funcion que saca el radio y devuelv la cantidad de restaurantes y promedio
     return searchInsideRadius(restaurants, {latFormated, lngFormated, radiusFormated})
 }
 

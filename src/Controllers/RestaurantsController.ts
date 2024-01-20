@@ -4,9 +4,7 @@
  */
 import { Request, Response, query } from "express";
 import service from "../Services/RestarurantsService";
-/**
-   * Método para obtener todos los restaurantes
-*/
+
 const getAll = async ({ query }: Request, res: Response) => {
    const { page } = query;
    try {

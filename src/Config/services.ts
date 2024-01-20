@@ -3,5 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 export const configServices = {
     PORT: process.env.PORT,
+    DATABASE_URL: process.env.DATABASE_URL,
     TOKEN_GITHUB_API: process.env.TOKEN_GITHUB_API,
 }

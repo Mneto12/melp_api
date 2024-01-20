@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "file": "ts-node-dev src/scripts/readCsv.ts"
+    "file": "ts-node-dev src/scripts/readCsvAndInsert.ts"
   },
   "keywords": [],
   "author": "",
@@ -26,12 +26,16 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
+    "pg": "^8.11.3",
+    "pg-format": "^1.0.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/pg": "^8.10.9",
+    "@types/pg-format": "^1.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   }
